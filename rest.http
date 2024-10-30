@@ -1,7 +1,13 @@
+@database = myDatabase
 @collection = myCollection
+@domain = http://localhost
+@port = 3000
+###
+GET {{domain}}:{{port}}/find/{{database}}/{{collection}}
+Content-Type: application/json
 
 ###
-POST http://localhost:3000/insert/{{collection}}
+POST {{domain}}:{{port}}/insert/{{database}}/{{collection}}
 Content-Type: application/json
 
 {
@@ -12,10 +18,6 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/find/{{collection}}
-Content-Type: application/json
-
-###
 @id = 67204f448b1a960a6e699437
-DELETE http://localhost:3000/delete/{{collection}}/{{id}}
+DELETE {{domain}}:{{port}}/delete/{{database}}/{{collection}}/{{id}}
 Content-Type: application/json

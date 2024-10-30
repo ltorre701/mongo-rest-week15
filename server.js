@@ -27,6 +27,18 @@ async function startServer() {
 
 startServer();
 
+// Read (Find) endpoint
+app.get("/find/:database/:collection", async (req, res) => {
+    try {
+        const { database,collection } = req.params;
+        const db = client.db(database);
+        const documents = await db.collection(collection).find({}).toArray();
+        res.status(200).json(documents);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // Create (Insert) endpoint
 app.post("/insert/:database/:collection", async (req, res) => {
     try {
@@ -40,23 +52,11 @@ app.post("/insert/:database/:collection", async (req, res) => {
     }
 });
 
-// Read (Find) endpoint
-app.get("/find/:database/:collection", async (req, res) => {
-    try {
-        const { collection } = req.params;
-        const db = client.db("myDatabase");
-        const documents = await db.collection(collection).find({}).toArray();
-        res.status(200).json(documents);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 // Delete endpoint
-app.delete("/delete/:collection/:id", async (req, res) => {
+app.delete("/delete/:database/:collection/:id", async (req, res) => {
     try {
-        const { collection, id } = req.params;
-        const db = client.db("myDatabase");
+        const { database, collection, id } = req.params;
+        const db = client.db(database);
         const result = await db
             .collection(collection)
             .deleteOne({ _id: new ObjectId(id) });
