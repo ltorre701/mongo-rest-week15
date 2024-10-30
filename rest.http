@@ -1,13 +1,10 @@
-@id = 67204f448b1a960a6e699437
 @collection = myCollection
 
 ###
-
-POST http://localhost:3000/insert
+POST http://localhost:3000/insert/{{collection}}
 Content-Type: application/json
 
 {
-  "collection": "{{collection}}",
   "document": {
     "name": "John",
     "age": 30
@@ -15,11 +12,10 @@ Content-Type: application/json
 }
 
 ###
-
 GET http://localhost:3000/find/{{collection}}
 Content-Type: application/json
 
 ###
-
+@id = 67204f448b1a960a6e699437
 DELETE http://localhost:3000/delete/{{collection}}/{{id}}
 Content-Type: application/json

@@ -28,10 +28,11 @@ async function startServer() {
 startServer();
 
 // Create (Insert) endpoint
-app.post("/insert", async (req, res) => {
+app.post("/insert/:database/:collection", async (req, res) => {
     try {
-        const { collection, document } = req.body;
-        const db = client.db("myDatabase");
+        const { document } = req.body;
+        const { database, collection } = req.params;
+        const db = client.db(database);
         const result = await db.collection(collection).insertOne(document);
         res.status(201).send(`Document inserted with ID: ${result.insertedId}`);
     } catch (err) {
@@ -40,7 +41,7 @@ app.post("/insert", async (req, res) => {
 });
 
 // Read (Find) endpoint
-app.get("/find/:collection", async (req, res) => {
+app.get("/find/:database/:collection", async (req, res) => {
     try {
         const { collection } = req.params;
         const db = client.db("myDatabase");
