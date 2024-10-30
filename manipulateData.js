@@ -6,22 +6,22 @@ const jsonFilePath = path.join(__dirname, 'foundDocuments.json');
 
 // Initialize the documents variable
 let documents = [];
+function readOutput() {
+    // Read the JSON file synchronously
+    try {
+        const data = fs.readFileSync(jsonFilePath, 'utf8');
+        const trimmedData = data.trim();
+        documents = JSON.parse(trimmedData);
 
-// Read the JSON file synchronously
-try {
-    const data = fs.readFileSync(jsonFilePath, 'utf8');
-    const trimmedData = data.trim();
-    documents = JSON.parse(trimmedData);
-
-    if (documents.length > 0) {
-        console.log('First document:', documents[0]);
-    } else {
-        console.log('No documents found.');
+        if (documents.length > 0) {
+            console.log('First document:', documents[0]);
+        } else {
+            console.log('No documents found.');
+        }
+    } catch (err) {
+        console.error('Error reading or parsing JSON file:', err);
     }
-} catch (err) {
-    console.error('Error reading or parsing JSON file:', err);
 }
-
 // Function to log document keys
 function logDocumentKeys(doc) {
     for (let key in doc) {
@@ -45,4 +45,4 @@ function saveDocuments() {
 }
 
 // Export the functions
-module.exports = { getDocuments, logDocumentKeys, saveDocuments };
+module.exports = { getDocuments, logDocumentKeys, saveDocuments, readOutput };

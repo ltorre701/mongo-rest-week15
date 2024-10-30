@@ -12,13 +12,16 @@ Content-Type: application/json
 
 {
   "document": {
-    "item": "banana",
-    "food_group": "fruits",
-    "price_in_usd": 0.15
+    "item": "yogurt",
+    "food_group": "dairy",
+    "price_in_usd": 0.9,
+    "quantity": 80,
+    "calories_per_100g": 59,
+    "fat_content": "0%"
   }
 }
 
 ###
-@id = 672189198b014f93b77159c5
+@id = 6721a699eb380677ff5c4139
 DELETE {{domain}}:{{port}}/delete/{{database}}/{{collection}}/{{id}}
 Content-Type: application/json
