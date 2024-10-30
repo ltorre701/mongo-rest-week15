@@ -1,7 +1,11 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
+const fs = require('fs');
 
-require("dotenv").config();
+if (fs.existsSync('.env')) {
+    require('dotenv').config();
+}
+
 const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.MONGO_URI;
@@ -30,7 +34,7 @@ startServer();
 // Read (Find) endpoint
 app.get("/find/:database/:collection", async (req, res) => {
     try {
-        const { database,collection } = req.params;
+        const { database, collection } = req.params;
         const db = client.db(database);
         const documents = await db.collection(collection).find({}).toArray();
         res.status(200).json(documents);

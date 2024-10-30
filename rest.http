@@ -1,5 +1,5 @@
-@database = myDatabase
-@collection = myCollection
+@database = inventory
+@collection = food
 @domain = http://localhost
 @port = 3000
 ###
@@ -12,12 +12,13 @@ Content-Type: application/json
 
 {
   "document": {
-    "name": "John",
-    "age": 30
+    "item": "banana",
+    "food_group": "fruits",
+    "price_in_usd": 0.15
   }
 }
 
 ###
-@id = 67204f448b1a960a6e699437
+@id = 672189198b014f93b77159c5
 DELETE {{domain}}:{{port}}/delete/{{database}}/{{collection}}/{{id}}
 Content-Type: application/json
