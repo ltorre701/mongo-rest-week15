@@ -1,8 +1,9 @@
-// server.js
+// ws-server.js
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const fs = require('fs');
 const WebSocket = require('ws');
+const sharedEmitter = require('./shared'); // Import the shared emitter
 
 // Load environment variables from .env file
 if (fs.existsSync('.env')) {

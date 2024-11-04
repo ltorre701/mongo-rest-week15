@@ -1,7 +1,6 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const fs = require('fs');
-const sharedEmitter = require('./shared'); // Import the shared emitter
 
 if (fs.existsSync('.env')) {
     require('dotenv').config();
