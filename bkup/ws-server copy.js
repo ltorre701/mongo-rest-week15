@@ -40,18 +40,17 @@ function connectToREPL() {
 
 // **Define routes before starting the server**
 
+// Read (Find) endpoint
 app.get("/find/:database/:collection", async (req, res) => {
     try {
         const { database, collection } = req.params;
         const db = client.db(database);
         const documents = await db.collection(collection).find({}).toArray();
 
-        // Emit the documents through the shared emitter
-        sharedEmitter.emit('documentsFetched', documents);
-
-        // Also still send via WebSocket if connected
+        // Send the documents to the REPL via WebSocket
         if (ws && ws.readyState === WebSocket.OPEN) {
             ws.send(JSON.stringify({ type: 'documentsFetched', documents }));
+            console.log('Documents sent to REPL via WebSocket');
         }
 
         res.status(200).json(documents);
