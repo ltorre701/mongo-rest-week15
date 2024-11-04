@@ -37,9 +37,6 @@ app.get("/find/:database/:collection", async (req, res) => {
         const { database, collection } = req.params;
         const db = client.db(database);
         const documents = await db.collection(collection).find({}).toArray();
-        // Emit the documents to the shared emitter
-        sharedEmitter.emit('documentsFetched', documents);
-
         res.status(200).json(documents);
     } catch (err) {
         res.status(500).json({ error: err.message });

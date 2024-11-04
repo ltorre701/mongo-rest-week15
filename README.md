@@ -1,12 +1,18 @@
 # Setting up a MongoDB connection
 
 ## Node dependency list
+
 - express: for server
 - dotenv: for environment variables
 - mongodb: for mongodb connection
 - ws (websocket): for in time connections
+
 ```bash
 npm i express dotenv mongodb ws
+```
+
+```bash
+npm install -D concurrently nodemon
 ```
 
 ## chmod command
@@ -29,6 +35,7 @@ curl ifconfig.me
 
 install mermaid markdown
 use
+
 ```mermaid
 code
 ```
